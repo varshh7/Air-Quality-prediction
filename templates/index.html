@@ -1,155 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Air Quality Prediction</title>
     <style>
-        /* Resetting default margins and paddings */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 600px;
-        }
-
-        h2 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        label {
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px 32px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group input {
-            transition: border 0.3s ease;
-        }
-
-        .form-group input:focus {
-            border-color: #4CAF50;
-        }
-
-        .error-message {
-            color: red;
-            font-size: 14px;
-            margin-top: 5px;
-        }
+        body { font-family: Arial, sans-serif; }
+        h1 { text-align: center; color: #4CAF50; }
+        form { margin: 20px auto; width: 300px; }
+        input[type="text"] { width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box; }
+        button { padding: 10px 15px; width: 100%; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+        .result { margin-top: 20px; font-size: 18px; color: #333; text-align: center; }
     </style>
 </head>
-
 <body>
-    <div class="container">
-        <h2>Predict Air Quality</h2>
-        <form method="POST" action="/predict">
-            <!-- Collecting inputs for 13 features -->
-            <div class="form-group">
-                <label for="feature1">PT08.S1(CO)</label>
-                <input type="text" name="feature1" placeholder="Enter PT08.S1(CO)" required>
-            </div>
-            <div class="form-group">
-                <label for="feature2">NMHC(GT)</label>
-                <input type="text" name="feature2" placeholder="Enter NMHC(GT)" required>
-            </div>
-            <div class="form-group">
-                <label for="feature3">C6H6(GT)</label>
-                <input type="text" name="feature3" placeholder="Enter C6H6(GT)" required>
-            </div>
-            <div class="form-group">
-                <label for="feature4">PT08.S2(NMHC)</label>
-                <input type="text" name="feature4" placeholder="Enter PT08.S2(NMHC)" required>
-            </div>
-            <div class="form-group">
-                <label for="feature5">NOx(GT)</label>
-                <input type="text" name="feature5" placeholder="Enter NOx(GT)" required>
-            </div>
-            <div class="form-group">
-                <label for="feature6">PT08.S3(NOx)</label>
-                <input type="text" name="feature6" placeholder="Enter PT08.S3(NOx)" required>
-            </div>
-            <div class="form-group">
-                <label for="feature7">NO2(GT)</label>
-                <input type="text" name="feature7" placeholder="Enter NO2(GT)" required>
-            </div>
-            <div class="form-group">
-                <label for="feature8">PT08.S4(NO2)</label>
-                <input type="text" name="feature8" placeholder="Enter PT08.S4(NO2)" required>
-            </div>
-            <div class="form-group">
-                <label for="feature9">PT08.S5(O3)</label>
-                <input type="text" name="feature9" placeholder="Enter PT08.S5(O3)" required>
-            </div>
-            <div class="form-group">
-                <label for="feature10">T</label>
-                <input type="text" name="feature10" placeholder="Enter Temperature (T)" required>
-            </div>
-            <div class="form-group">
-                <label for="feature11">RH</label>
-                <input type="text" name="feature11" placeholder="Enter Relative Humidity (RH)" required>
-            </div>
-            <div class="form-group">
-                <label for="feature12">AH</label>
-                <input type="text" name="feature12" placeholder="Enter Absolute Humidity (AH)" required>
-            </div>
-            <div class="form-group">
-                <label for="feature13">CO(GT)</label>
-                <input type="text" name="feature13" placeholder="Enter CO(GT)" required>
-            </div>
-            <button type="submit">Predict</button>
-        </form>
-    </div>
-</body>
 
+    <h1>Air Quality Prediction</h1>
+
+    <form method="POST" action="/predict">
+        <input type="text" name="feature1" placeholder="PT08.S1(CO)" required><br>
+        <input type="text" name="feature2" placeholder="NMHC(GT)" required><br>
+        <input type="text" name="feature3" placeholder="C6H6(GT)" required><br>
+        <input type="text" name="feature4" placeholder="PT08.S2(NMHC)" required><br>
+        <input type="text" name="feature5" placeholder="NOx(GT)" required><br>
+        <input type="text" name="feature6" placeholder="PT08.S3(NOx)" required><br>
+        <input type="text" name="feature7" placeholder="NO2(GT)" required><br>
+        <input type="text" name="feature8" placeholder="PT08.S4(NO2)" required><br>
+        <input type="text" name="feature9" placeholder="PT08.S5(O3)" required><br>
+        <input type="text" name="feature10" placeholder="T" required><br>
+        <input type="text" name="feature11" placeholder="RH" required><br>
+        <input type="text" name="feature12" placeholder="AH" required><br>
+        <input type="text" name="feature13" placeholder="CO(GT)" required><br>
+        <button type="submit">Predict</button>
+    </form>
+
+    <!-- This section will display the prediction result -->
+    {% if prediction %}
+        <div class="result">
+            <h3>Prediction Result: {{ prediction }}</h3>
+        </div>
+    {% endif %}
+    
+</body>
 </html>
